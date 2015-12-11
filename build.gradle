@@ -57,7 +57,7 @@ tasks.addRule('Pattern: koan<Number>: Runs a single Koan') { String taskName ->
         tasks.withType(Test) { testTask ->
             logger.info("Single Koan Execution: apply include pattern to Test task <$testTask.name>")
             testTask.includes = WrapUtil.toSet("**/${koanName}.class")
-            dummyTask.dependsOn testTask
+            dummyTask.dependsOn testTask,gmetrics
         }
     }
 }
@@ -115,7 +115,9 @@ task gmetrics << {
             option(name: 'metrics', value: "MethodLineCount,CyclomaticComplexity")
         }
         report(type: 'org.gmetrics.report.XmlReportWriter') {
-            option(name: 'outputFile', value: "${project.reporting.baseDir.path}/gmetrics/gmetrics.xml")
+            option(name: 'outputFile', value: "src/test/resources/gmetrics/gmetrics.xml")
+            option(name: 'functions', value: "MethodLineCount=total;CyclomaticComplexity=total")
+            option(name: 'levels', value: "MethodLineCount=method;CyclomaticComplexity=method")
         }
         fileset(dir: 'src') {
             include(name: '**/*.groovy')
