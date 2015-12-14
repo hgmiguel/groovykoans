@@ -107,6 +107,7 @@ task gmetrics << {
 
     //ensure reporting directory created
     ant.mkdir(dir: "${project.reporting.baseDir.path}/gmetrics")
+    ant.mkdir(dir: "src/test/resources/gmetrics")
     ant.gmetrics() {
         report(type: 'org.gmetrics.report.BasicHtmlReportWriter') {
             option(name: 'outputFile', value: "${project.reporting.baseDir.path}/gmetrics/gmetrics.html")
