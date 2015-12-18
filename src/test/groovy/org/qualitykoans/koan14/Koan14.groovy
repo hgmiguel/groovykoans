@@ -25,7 +25,8 @@ class Koan14 extends GroovyTestCase {
     void test01_ExtractMethodQuality() {
       localVariables.printOwing()
       assert outContent.toString().replace("\n"," ") == assertString
-      assert metricTotal('printOwing', 'MethodLineCount') == 4
+      assert metricTotal('printOwing', 'MethodLineCount') == 5
+      assert metricTotal('printOwing', 'CyclomaticComplexity') == 1
     }
 }
 
