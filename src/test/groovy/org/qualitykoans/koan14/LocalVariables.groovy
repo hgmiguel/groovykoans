@@ -7,8 +7,7 @@ class LocalVariables {
 
   public void printOwing() {
     printBanner()
-    double outstanding = getOutstanding()
-    printDetails(outstanding)
+    printDetails(getOutstanding())
   }
 
   public void printBanner() {
