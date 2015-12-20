@@ -8,13 +8,13 @@ class Koan14 extends GroovyTestCase {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final localVariables = new LocalVariables()
     private final String assertString = '************************** ***** Customer Owes ****** ************************** name:name amount:60.0 '
+    private final String assertStringPreviousAmount = '************************** ***** Customer Owes ****** ************************** name:name amount:72.0 '
 
 
     def xml
 
     void setUp() {
       System.setOut(new PrintStream(outContent));
-
       xml = new XmlSlurper().parseText(this.getClass().getResource('/gmetrics/gmetrics.xml').getText()) 
     }
 
@@ -27,6 +27,13 @@ class Koan14 extends GroovyTestCase {
       assert outContent.toString().replace("\n"," ") == assertString
       assert metricTotal('printOwing', 'MethodLineCount') == 4
       assert metricTotal('printOwing', 'CyclomaticComplexity') == 1
+    }
+    
+    void test02_ExtractMethodWithTemporaryVariable() {
+      localVariables.printOwingPreviousAmount(10.0d)
+      assert outContent.toString().replace("\n"," ") == assertStringPreviousAmount
+      assert metricTotal('printOwingPreviousAmount', 'MethodLineCount') == 4
+      assert metricTotal('printOwingPreviousAmount', 'CyclomaticComplexity') == 1
     }
 }
 
