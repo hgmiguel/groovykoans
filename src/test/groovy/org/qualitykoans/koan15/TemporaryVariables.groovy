@@ -1,4 +1,4 @@
-package org.qualitykoans.koan14
+package org.qualitykoans.koan15
 
 class TemporaryVariables {
   
