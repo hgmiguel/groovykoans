@@ -73,5 +73,13 @@ class Koan14 extends GroovyTestCase {
       assert metricTotal('calculatePriceWithDiscountAndShipping', 'MethodLineCount') == 4
     }
 
+    void test06_SplitTemporaryFields() {
+      SplitTemporaryVariable splitTemporaryVariable = new SplitTemporaryVariable()
+      assert splitTemporaryVariable.getSize(10,10) == 100
+
+      assert metricTotal('getSize', 'CyclomaticComplexity') == 1
+      assert metricTotal('getSize', 'MethodLineCount') >= 8
+    }
+
 }
 
