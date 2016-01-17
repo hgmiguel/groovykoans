@@ -30,30 +30,7 @@ class Koan14 extends QualityKoanMetrics {
 
 
 
-    void test04_ExtractComplicatedValidationWithMethod() {
-      ExplainVariable explainVariable = new ExplainVariable(platform: 'MAC',
-        browser: 'SAFARI', resize:10)
-      assert explainVariable.isComplicatedValidation()
-      explainVariable.browser = 'IE'
-      assert explainVariable.isComplicatedValidation() == false
 
-      assert metricTotal('isComplicatedValidation', 'CyclomaticComplexity') <= 5
-      assert metricTotal('isComplicatedValidation', 'MethodLineCount') == 8
-    }
-    
-    void test05_ExtractComplicatedValidationWithMethod2() {
-      ExplainVariable explainVariable = new ExplainVariable(quantity: 100,
-        itemPrice: 100)
-      assert explainVariable.calculatePriceWithDiscountAndShipping() == 10100
-
-      explainVariable.quantity = 10000
-      explainVariable.itemPrice = 100
-
-      assert explainVariable.calculatePriceWithDiscountAndShipping() == 952600
-
-      assert metricTotal('calculatePriceWithDiscountAndShipping', 'CyclomaticComplexity') == 1
-      assert metricTotal('calculatePriceWithDiscountAndShipping', 'MethodLineCount') == 4
-    }
 
     void test06_SplitTemporaryFields() {
       SplitTemporaryVariable splitTemporaryVariable = new SplitTemporaryVariable()
