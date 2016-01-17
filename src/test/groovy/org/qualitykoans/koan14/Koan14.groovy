@@ -35,5 +35,29 @@ class Koan14 extends GroovyTestCase {
       assert metricTotal('printOwingPreviousAmount', 'MethodLineCount') == 4
       assert metricTotal('printOwingPreviousAmount', 'CyclomaticComplexity') == 1
     }
+
+    void test03_ExtractTemporaryVariablesWithMethod() {
+      TemporaryVariables temporaryVariables = new TemporaryVariables(10,100)
+      assert temporaryVariables.calculatePrice() == 980
+
+      temporaryVariables.quantity = 20
+      temporaryVariables.itemPrice = 100
+      assert temporaryVariables.calculatePrice() == 1900
+
+      assert metricTotal('calculatePrice', 'CyclomaticComplexity') == 2
+      assert metricTotal('calculatePrice', 'MethodLineCount') == 6
+    }
+
+    void test04_ExtractComplicatedValidationWithMethod() {
+      ExplainVariable explainVariable = new ExplainVariable(platform: 'MAC',
+        browser: 'SAFARI', resize:10)
+      assert explainVariable.isComplicatedValidation()
+      explainVariable.browser = 'IE'
+      assert explainVariable.isComplicatedValidation() == false
+
+      assert metricTotal('calculatePrice', 'CyclomaticComplexity') == 2
+      assert metricTotal('calculatePrice', 'MethodLineCount') == 8
+    }
+
 }
 
