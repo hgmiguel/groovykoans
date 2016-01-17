@@ -12,7 +12,7 @@ class Koan16 extends QualityKoanMetrics {
         assert explainVariable.isComplicatedValidation() == false
 
         assert metricTotal('isComplicatedValidation', 'CyclomaticComplexity') <= 5
-        assert metricTotal('isComplicatedValidation', 'MethodLineCount') == 8
+        assert metricTotal('isComplicatedValidation', 'MethodLineCount') <= 8
     }
 
     void test02_ExtractComplicatedValidationWithMethod2() {
@@ -26,6 +26,6 @@ class Koan16 extends QualityKoanMetrics {
         assert explainVariable.calculatePriceWithDiscountAndShipping() == 952600
 
         assert metricTotal('calculatePriceWithDiscountAndShipping', 'CyclomaticComplexity') == 1
-        assert metricTotal('calculatePriceWithDiscountAndShipping', 'MethodLineCount') == 4
+        assert metricTotal('calculatePriceWithDiscountAndShipping', 'MethodLineCount') <= 4
     }
 }

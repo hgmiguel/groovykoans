@@ -24,8 +24,8 @@ class Koan14 extends QualityKoanMetrics {
     void test02_ExtractMethodWithTemporaryVariable() {
       localVariables.printOwingPreviousAmount(10.0d)
       assert outContent.toString().replace("\n"," ") == assertStringPreviousAmount
-      assert metricTotal('printOwingPreviousAmount', 'MethodLineCount') == 4
-      assert metricTotal('printOwingPreviousAmount', 'CyclomaticComplexity') == 1
+      assert metricTotal('printOwingPreviousAmount', 'MethodLineCount') <= 4
+      assert metricTotal('printOwingPreviousAmount', 'CyclomaticComplexity') <= 1
     }
 
 
@@ -36,7 +36,7 @@ class Koan14 extends QualityKoanMetrics {
       SplitTemporaryVariable splitTemporaryVariable = new SplitTemporaryVariable()
       assert splitTemporaryVariable.getSize(10,10) == 100
 
-      assert metricTotal('getSize', 'CyclomaticComplexity') == 1
+      assert metricTotal('getSize', 'CyclomaticComplexity') <= 1
       assert metricTotal('getSize', 'MethodLineCount') >= 8
     }
 

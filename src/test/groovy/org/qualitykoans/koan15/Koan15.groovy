@@ -13,7 +13,7 @@ class Koan15 extends QualityKoanMetrics {
         temporaryVariables.itemPrice = 100
         assert temporaryVariables.calculatePrice() == 1900
 
-        assert metricTotal('calculatePrice', 'CyclomaticComplexity') == 2
-        assert metricTotal('calculatePrice', 'MethodLineCount') == 6
+        assert metricTotal('calculatePrice', 'CyclomaticComplexity') <= 2
+        assert metricTotal('calculatePrice', 'MethodLineCount') <= 6
     }
 }
