@@ -55,8 +55,22 @@ class Koan14 extends GroovyTestCase {
       explainVariable.browser = 'IE'
       assert explainVariable.isComplicatedValidation() == false
 
-      assert metricTotal('calculatePrice', 'CyclomaticComplexity') == 2
-      assert metricTotal('calculatePrice', 'MethodLineCount') == 8
+      assert metricTotal('isComplicatedValidation', 'CyclomaticComplexity') <= 5
+      assert metricTotal('isComplicatedValidation', 'MethodLineCount') == 8
+    }
+    
+    void test05_ExtractComplicatedValidationWithMethod2() {
+      ExplainVariable explainVariable = new ExplainVariable(quantity: 100,
+        itemPrice: 100)
+      assert explainVariable.calculatePriceWithDiscountAndShipping() == 10100
+
+      explainVariable.quantity = 10000
+      explainVariable.itemPrice = 100
+
+      assert explainVariable.calculatePriceWithDiscountAndShipping() == 952600
+
+      assert metricTotal('calculatePriceWithDiscountAndShipping', 'CyclomaticComplexity') == 1
+      assert metricTotal('calculatePriceWithDiscountAndShipping', 'MethodLineCount') == 4
     }
 
 }
