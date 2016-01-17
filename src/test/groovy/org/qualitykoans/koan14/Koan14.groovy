@@ -1,9 +1,8 @@
 package org.qualitykoans.koan14
 
-import groovy.util.XmlSlurper
-import java.io.ByteArrayOutputStream
+import org.qualitykoans.common.test.suite.QualityKoanMetrics
 
-class Koan14 extends GroovyTestCase {
+class Koan14 extends QualityKoanMetrics {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final localVariables = new LocalVariables()
@@ -11,15 +10,8 @@ class Koan14 extends GroovyTestCase {
     private final String assertStringPreviousAmount = '************************** ***** Customer Owes ****** ************************** name:name amount:72.0 '
 
 
-    def xml
-
     void setUp() {
       System.setOut(new PrintStream(outContent));
-      xml = new XmlSlurper().parseText(this.getClass().getResource('/gmetrics/gmetrics.xml').getText()) 
-    }
-
-    private metricTotal(String methodName, String metric) {
-      xml.Package.Class.Method.find {it.'@name' == methodName}.MetricResult.find {it.'@name' == metric}.'@total'.toInteger()
     }
 
     void test01_ExtractMethodQuality() {
@@ -36,17 +28,7 @@ class Koan14 extends GroovyTestCase {
       assert metricTotal('printOwingPreviousAmount', 'CyclomaticComplexity') == 1
     }
 
-    void test03_ExtractTemporaryVariablesWithMethod() {
-      TemporaryVariables temporaryVariables = new TemporaryVariables(10,100)
-      assert temporaryVariables.calculatePrice() == 980
 
-      temporaryVariables.quantity = 20
-      temporaryVariables.itemPrice = 100
-      assert temporaryVariables.calculatePrice() == 1900
-
-      assert metricTotal('calculatePrice', 'CyclomaticComplexity') == 2
-      assert metricTotal('calculatePrice', 'MethodLineCount') == 6
-    }
 
     void test04_ExtractComplicatedValidationWithMethod() {
       ExplainVariable explainVariable = new ExplainVariable(platform: 'MAC',
