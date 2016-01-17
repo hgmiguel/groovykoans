@@ -27,18 +27,5 @@ class Koan14 extends QualityKoanMetrics {
       assert metricTotal('printOwingPreviousAmount', 'MethodLineCount') <= 4
       assert metricTotal('printOwingPreviousAmount', 'CyclomaticComplexity') <= 1
     }
-
-
-
-
-
-    void test06_SplitTemporaryFields() {
-      SplitTemporaryVariable splitTemporaryVariable = new SplitTemporaryVariable()
-      assert splitTemporaryVariable.getSize(10,10) == 100
-
-      assert metricTotal('getSize', 'CyclomaticComplexity') <= 1
-      assert metricTotal('getSize', 'MethodLineCount') >= 8
-    }
-
 }
 
